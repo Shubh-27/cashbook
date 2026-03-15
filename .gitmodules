@@ -1,0 +1,9 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/Shubh-27/cashbook-backend.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/Shubh-27/cashbook-frontend.git
+[submodule "electron"]
+	path = electron
+	url = https://github.com/Shubh-27/cashbook-electron.git

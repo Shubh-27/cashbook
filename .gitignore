@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Local DB Folder
+database/
+
+# IDE and System
+.vscode/
+.idea/
+.DS_Store
+*.log
+
