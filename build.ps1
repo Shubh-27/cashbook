@@ -8,7 +8,7 @@ $Root = $PSScriptRoot
 
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Cyan
-Write-Host "  Bank Manager - Production Build" -ForegroundColor Cyan
+Write-Host "  CashBook - Production Build" -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan
 Write-Host ""
 # ----------------------------------------------------------
@@ -67,6 +67,9 @@ dotnet publish backend\backend.csproj `
   --runtime win-x64 `
   --self-contained true `
   -p:PublishSingleFile=true `
+  -p:PublishTrimmed=false `
+  -p:DebugType=none `
+  -p:DebugSymbols=false `
   -p:IncludeNativeLibrariesForSelfExtract=true `
   --output "$ApiOutput"
 
@@ -94,7 +97,7 @@ if ($LASTEXITCODE -ne 0) { throw "Electron packaging failed." }
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Green
 Write-Host "  BUILD COMPLETE!" -ForegroundColor Green
-Write-Host "  Installer: electron\dist\Bank Manager Setup*.exe" -ForegroundColor Green
+Write-Host "  Installer: electron\dist\CashBook Setup*.exe" -ForegroundColor Green
 Write-Host "==================================================" -ForegroundColor Green
 Write-Host ""
 
