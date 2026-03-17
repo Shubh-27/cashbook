@@ -51,7 +51,7 @@ cd "$ROOT/backend"
 # or just backend.csproj if the user is already in the backend folder.
 # Based on build.ps1, it was: dotnet publish backend\backend.csproj ...
 # Since we are already in $ROOT/backend, it should be:
-dotnet publish backend.csproj \
+dotnet publish backend/backend.csproj \
   --configuration Release \
   --runtime $RUNTIME \
   --self-contained true \
