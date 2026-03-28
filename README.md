@@ -8,9 +8,9 @@ Cashbook is a cross-platform desktop application that combines the power of Elec
 
 ### Architecture
 
-- **Frontend**: [React](frontend/README.md) - A responsive user interface built with React, Vite, and Tailwind CSS.
-- **Backend API**: [ASP.NET Core](backend/README.md) - A robust C# backend providing RESTful services and SQLite database management.
-- **Shell**: [Electron](electron/README.md) - The desktop environment that integrates the frontend and interacts with the operating system.
+- **Frontend**: [React](https://github.com/Shubh-27/cashbook-frontend) - A responsive user interface built with React, Vite, and Tailwind CSS.
+- **Backend API**: [ASP.NET Core](https://github.com/Shubh-27/cashbook-backend) - A robust C# backend providing RESTful services and SQLite database management.
+- **Shell**: [Electron](https://github.com/Shubh-27/cashbook-electron) - The desktop environment that integrates the frontend and interacts with the operating system.
 
 ## Project Structure
 
