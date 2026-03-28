@@ -5,10 +5,10 @@
   "private": true,
   "scripts": {
     "install:all": "npm install --prefix frontend && npm install --prefix electron",
-    "dev:backend": "dotnet run --project backend/backend/backend.csproj --urls http://localhost:5000",
+    "dev:backend": "dotnet run --project backend/backend/backend.csproj --urls http://localhost:5050",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:electron": "npm start --prefix electron",
-    "dev": "concurrently --kill-others-on-fail -n \"API,React,Electron\" -c \"cyan,green,yellow\" \"npm run dev:backend\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 http://localhost:5000/health && npm run dev:electron\"",
+    "dev": "concurrently --kill-others-on-fail -n \"API,React,Electron\" -c \"cyan,green,yellow\" \"npm run dev:backend\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 http://localhost:5050/health && npm run dev:electron\"",
     "dev:start": "concurrently --kill-others-on-fail -n \"React,Electron\" -c \"green,yellow\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 && npm run dev:electron\"",
     "build": "powershell -ExecutionPolicy Bypass -File ./build.ps1"
   },
