@@ -1,22 +1,18 @@
 #!/bin/bash
 
 # ============================================================
-#  build.sh - Production Build Script for CashBook (Mac)
-#  Produces a macOS DMG/Zip at electron/dist/
-#  How to use on Mac
-#  1. Open your terminal on Mac.
-#  2. Navigate to the project root directory.
-#  3. Make the script executable: chmod +x build.sh
-#  4. Run the build script: ./build.sh
+#  build.sh - Production Build Script for CashBook (Unified)
+#  Produces both macOS DMG and Windows EXE at electron/dist/
 # ============================================================
 
 set -e # Exit on error
 
 ROOT=$(pwd)
+API_OUTPUT="$ROOT/electron/resources/api"
 
 echo ""
 echo "=================================================="
-echo "  CashBook - Production Build (macOS)"
+echo "  CashBook - Unified Production Build"
 echo "=================================================="
 echo ""
 
@@ -29,12 +25,11 @@ npm run build
 echo "[Step 1/3] Frontend built -> electron/ui/"
 echo ""
 
-# ----------------------------------------------------------
-# Step 2: Publish ASP.NET Backend
-# ----------------------------------------------------------
-echo "[Step 2/3] Publishing ASP.NET backend..."
 
-API_OUTPUT="$ROOT/electron/resources/api"
+# ----------------------------------------------------------
+# Step 2: Build for macOS
+# ----------------------------------------------------------
+echo "[Step 2/3] Building for macOS..."
 
 # Determine architecture
 ARCH=$(uname -m)
@@ -44,13 +39,12 @@ else
     RUNTIME="osx-x64"
 fi
 
-echo "  Targeting runtime: $RUNTIME"
+echo "  Publishing .NET backend ($RUNTIME)..."
+# Clear previous api artifacts
+rm -rf "$API_OUTPUT"
+mkdir -p "$API_OUTPUT"
 
 cd "$ROOT/backend"
-# Note: We assume the csproj is at backend/backend.csproj relative to the backend folder
-# or just backend.csproj if the user is already in the backend folder.
-# Based on build.ps1, it was: dotnet publish backend\backend.csproj ...
-# Since we are already in $ROOT/backend, it should be:
 dotnet publish backend/backend.csproj \
   --configuration Release \
   --runtime $RUNTIME \
@@ -62,29 +56,52 @@ dotnet publish backend/backend.csproj \
   -p:IncludeNativeLibrariesForSelfExtract=true \
   --output "$API_OUTPUT"
 
-echo "[Step 2/3] Backend published -> electron/resources/api/"
-echo ""
-
-# ----------------------------------------------------------
-# Step 3: Package with electron-builder
-# ----------------------------------------------------------
-echo "[Step 3/3] Packaging with electron-builder..."
-
+echo "  Packaging macOS application..."
 cd "$ROOT/electron"
-
 # Ensure electron dependencies are installed
 if [ ! -d "node_modules" ]; then
-    echo "  Installing electron dependencies..."
     npm install
 fi
-
-npm run dist
+npx electron-builder --mac
 echo ""
+
+
+# ----------------------------------------------------------
+# Step 3: Build for Windows
+# ----------------------------------------------------------
+echo "[Step 3/3] Building for Windows..."
+
+RUNTIME="win-x64"
+echo "  Publishing .NET backend ($RUNTIME)..."
+# Clear macOS api artifacts
+rm -rf "$API_OUTPUT"
+mkdir -p "$API_OUTPUT"
+
+cd "$ROOT/backend"
+dotnet publish backend/backend.csproj \
+  --configuration Release \
+  --runtime $RUNTIME \
+  --self-contained true \
+  -p:PublishSingleFile=true \
+  -p:PublishTrimmed=false \
+  -p:DebugType=none \
+  -p:DebugSymbols=false \
+  -p:IncludeNativeLibrariesForSelfExtract=true \
+  --output "$API_OUTPUT"
+
+echo "  Packaging Windows application..."
+cd "$ROOT/electron"
+npx electron-builder --win
+echo ""
+
 
 echo "=================================================="
 echo "  BUILD COMPLETE!"
-echo "  Artifacts: electron/dist/*.dmg"
+echo "  Artifacts in electron/dist/:"
+echo "    - macOS: *.dmg"
+echo "    - Windows: *.exe"
 echo "=================================================="
 echo ""
 
 cd "$ROOT"
+
