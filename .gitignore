@@ -11,3 +11,5 @@ database/
 *.log
 
 .claude
+graphify-out/
+.agent
