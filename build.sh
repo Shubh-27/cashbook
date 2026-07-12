@@ -92,16 +92,46 @@ dotnet publish backend/backend.csproj \
 echo "  Packaging Windows application..."
 cd "$ROOT/electron"
 npx electron-builder --win
-echo ""
+# ----------------------------------------------------------
+# Cleanup: Restore macOS backend for local development/running
+# ----------------------------------------------------------
+echo "[Cleanup] Restoring host backend for local development..."
+ARCH=$(uname -m)
+if [ "$ARCH" = "arm64" ]; then
+    RUNTIME="osx-arm64"
+else
+    RUNTIME="osx-x64"
+fi
 
+rm -rf "$API_OUTPUT"
+mkdir -p "$API_OUTPUT"
+
+cd "$ROOT/backend"
+dotnet publish backend/backend.csproj \
+  --configuration Release \
+  --runtime $RUNTIME \
+  --self-contained true \
+  -p:PublishSingleFile=true \
+  -p:PublishTrimmed=false \
+  -p:DebugType=none \
+  -p:DebugSymbols=false \
+  -p:IncludeNativeLibrariesForSelfExtract=true \
+  --output "$API_OUTPUT"
+echo ""
 
 echo "=================================================="
 echo "  BUILD COMPLETE!"
 echo "  Artifacts in electron/dist/:"
-echo "    - macOS: *.dmg"
-echo "    - Windows: *.exe"
+echo "    - macOS: *.dmg, *.zip, latest-mac.yml"
+echo "    - Windows: *.exe, latest.yml, *.blockmap"
+echo "=================================================="
+echo ""
+echo "⚠️ [AUTO-UPDATER REMINDER] ⚠️"
+echo "For auto-updates to work, you MUST upload the metadata files"
+echo "(*.yml) along with the installers to the GitHub Release!"
 echo "=================================================="
 echo ""
 
 cd "$ROOT"
+
 
