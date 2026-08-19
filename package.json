@@ -4,8 +4,8 @@
   "description": "Root scripts for Bank Manager desktop app (Electron + React + ASP.NET + SQLite)",
   "private": true,
   "scripts": {
-    "install:all": "npm install --prefix frontend && npm install --prefix electron",
-    "dev:backend": "dotnet run --project backend/backend/backend.csproj --urls http://localhost:5050",
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix electron",
+    "dev:backend": "dotnet run --project backend/backend/backend.csproj --urls http://0.0.0.0:5050",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:electron": "npm start --prefix electron",
     "dev": "concurrently --kill-others-on-fail -n \"API,React,Electron\" -c \"cyan,green,yellow\" \"npm run dev:backend\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 http://localhost:5050/health && npm run dev:electron\"",
