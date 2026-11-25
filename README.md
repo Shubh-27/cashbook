@@ -74,7 +74,9 @@ CashBook runs as a unified desktop application where the Electron shell orchestr
 - **📝 High-Performance Transaction Ledger**: TanStack Table data grid supporting custom sorting, multi-column search, date filtering, pagination, and inline edits.
 - **⚡ Smart Description Autocomplete**: Dynamic description suggestions for swift and consistent transaction entry.
 - **💾 Database Management & Tools**: Create point-in-time database backups, restore previous states, seed demo data, and view storage statistics.
-- **📁 Excel Import & Export**: Import transactions from external spreadsheets and export accounting records to Excel using ClosedXML.
+- **📁 Statement Import Profiles**: Create a reusable, versioned layout for CSV, XLS, or XLSX bank statements; preview and map columns safely, then import transactions using the selected profile.
+- **🔒 Private Local Processing**: Uploaded statements are parsed locally and never stored. Saved samples, signatures, and statement metadata mask account numbers, PANs, phone numbers, and email addresses.
+- **📤 Excel Import & Export**: Import transactions from external spreadsheets and export accounting records to Excel using ClosedXML.
 - **🚀 Portable & Installer Modes**: Support for standard Windows NSIS installers and zero-install portable execution with automatic local database path detection.
 - **🔄 Seamless Auto-Updates**: Over-the-air updates distributed via GitHub Releases using `electron-updater`.
 
@@ -102,7 +104,7 @@ CashBook/
 │   ├── backend.service/    # Business services, Unit of Work, Repository implementations
 │   ├── backend.model/      # EF Core DbContext, entity models, DTOs, migrations
 │   ├── backend.common/     # Shared configuration, query extensions, custom exceptions
-│   ├── backend.tests/      # Unit & integration test suite (120+ tests)
+│   ├── backend.tests/      # Unit & integration test suite (188+ tests)
 │   └── backend.slnx        # Visual Studio solution file
 ├── electron/               # Electron main process, preload script, packaging config
 │   ├── assets/             # Application icons (.ico, .icns, .png)
