@@ -12,7 +12,8 @@ database/
 
 .claude
 graphify-out/
-.agent
+.agent/*
+!.agent/rules/
 .demovie
 
 # Build, local data, and secrets
