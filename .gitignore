@@ -27,3 +27,8 @@ dist-web/
 *.p12
 *.key
 *.pem
+
+# Local Tailscale PWA helper scripts
+/start-pwa-tailscale.cmd
+/tailscale-pwa.ps1
+/.tailscale-pwa.pids.json
