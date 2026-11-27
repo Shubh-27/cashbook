@@ -14,3 +14,16 @@ database/
 graphify-out/
 .agent
 .demovie
+
+# Build, local data, and secrets
+dist/
+dist-web/
+.env*
+*.db
+*.db-shm
+*.db-wal
+*.bak
+*.pfx
+*.p12
+*.key
+*.pem

@@ -1,6 +1,6 @@
 {
   "name": "bank-desktop-root",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Root scripts for Bank Manager desktop app (Electron + React + ASP.NET + SQLite)",
   "private": true,
   "scripts": {

@@ -97,7 +97,11 @@ if ($LASTEXITCODE -ne 0) { throw "Electron packaging failed." }
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Green
 Write-Host "  BUILD COMPLETE!" -ForegroundColor Green
-Write-Host "  Installer: electron\dist\CashBook Setup*.exe" -ForegroundColor Green
+Write-Host "  Artifacts in electron\dist\:" -ForegroundColor Green
+Write-Host "    - CashBook Setup *.exe" -ForegroundColor Green
+Write-Host "    - *.blockmap" -ForegroundColor Green
+Write-Host "    - latest.yml" -ForegroundColor Green
+Write-Host "  Note: Real releases are built and published via CI (.github/workflows/release.yml)." -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Green
 Write-Host ""
 
